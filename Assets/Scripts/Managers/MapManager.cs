@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Linq;
 
 public class MapManager : MonoBehaviour {
 	private GameManager gm;
@@ -28,9 +29,17 @@ public class MapManager : MonoBehaviour {
 		BuildTexture(map, currentMap, sizex, sizez);
 	}
 
-	public Tile getTile(int x, int y, TileMapData map) 
+	public Tile getTile(int x, int z, TileMapData map) 
 	{
-		return map.map_data[x,y];
+		return map.map_data[x,z];
+	}
+
+	public Vector3 getSpawnPoint()
+	{
+		Room room = currentMap.rooms.FirstOrDefault();
+		Vector3 location = new Vector3(room.left + 1f, 0, room.top + 1f);
+		return location;
+
 	}
 
 	public bool isTileMoveable(Vector3 currentPlayerPosition, Player.Direction direction)

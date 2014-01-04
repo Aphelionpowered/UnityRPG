@@ -24,7 +24,7 @@ public class Player : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		setPOffset();
+//		setPOffset();
 	}
 
 	private void setPOffset(){
@@ -32,6 +32,14 @@ public class Player : MonoBehaviour {
 		Vector3 ex = renderer.bounds.extents;
 		offset = ex;
 		transform.localPosition = new Vector3 (transform.localPosition.x + ex.x,transform.localPosition.y + ex.y, transform.localPosition.z + ex.z);
+	}
+
+
+	public void setPlayerLocation(Vector3 location)
+	{
+		Vector3 offsetLocation = new Vector3(location.x + 0.5f,location.y ,location.z+0.5f);
+		Debug.Log("Setting player location to: " + offsetLocation.ToString());
+		transform.localPosition = offsetLocation;
 	}
 
 	// Update is called once per frame

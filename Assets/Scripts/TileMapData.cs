@@ -1,13 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class TileMapData {
+public class TileMapData : MonoBehaviour {
 	int size_x;
 	int size_y;
-	public Texture2D terrainTiles;
 
 	public Tile[,] map_data;
-	List<Room> rooms;
+	public List<Room> rooms;
 
 	public Dictionary<int,Tile> tiles;
 

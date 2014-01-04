@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour {
 	void Start()
 	{
 		CreateNewLevel(50,50);
+		playerm.SpawnPlayer();
 	}
 
 
