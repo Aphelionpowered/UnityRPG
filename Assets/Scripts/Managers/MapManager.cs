@@ -18,13 +18,19 @@ public class MapManager : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		
+
 	}
 	public TileMapData CreateNewMap(int sizex, int sizez){
 		TileMapData tmpmap = new TileMapData(sizex, sizez);
 		currentMap = tmpmap;
 		return tmpmap;
 	}
+
+//	public Tile getTile(int x, int y,Location l) 
+//	{
+//
+//		return null;
+//	}
 	
 	public TileMapData GetCurrentMap {
 		get{

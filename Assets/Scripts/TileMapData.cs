@@ -23,24 +23,7 @@ public class TileMapData {
 		Right,
 	}
 	
-	public Tile getTile(int x, int y,Location l) {
-		if(l == Location.Current){
-			return map_data[x,y];
-		}
-		if(l == Location.Above) {
-			return map_data[x,y + 1];
-		}
-		if(l == Location.Below){
-			return map_data[x,y - 1];
-		}
-		if(l == Location.Left){
-			return map_data[x - 1,y];
-		}
-		if(l == Location.Right) {
-			return map_data[x + 1,y];
-		}
-		return null;
-	}
+
 	/*
 	public List<Vector2> getWalkableTiles(){
 		foreach(Tile t in map_data) {
