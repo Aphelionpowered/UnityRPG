@@ -7,6 +7,8 @@ public class TileMapData : MonoBehaviour {
 
 	public Tile[,] map_data;
 	public List<Room> rooms;
+	public int maxFails = 8;
+	public int maxRooms = 30;
 
 	public Dictionary<int,Tile> tiles;
 
@@ -38,12 +40,10 @@ public class TileMapData : MonoBehaviour {
 				map_data[x,y] = stone;
 			}
 		}
-		
+
 		rooms = new List<Room>();
 
-		int maxFails = 10;
-		
-		while(rooms.Count < 10) {
+		while(rooms.Count < maxRooms) {
 			int rsx = Random.Range(4,14);
 			int rsy = Random.Range(4,10);
 			
