@@ -387,6 +387,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b991c9db47b6a24ebc62685890403e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canMove: 1
 --- !u!1 &1698338018
 GameObject:
   m_ObjectHideFlags: 0
@@ -582,6 +583,10 @@ Prefab:
     - target: {fileID: 100004, guid: 5fdfe4098820b7b4b95c640429fc3ca7, type: 2}
       propertyPath: m_Name
       value: Map
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 5fdfe4098820b7b4b95c640429fc3ca7, type: 2}
+      propertyPath: canMove
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5fdfe4098820b7b4b95c640429fc3ca7, type: 2}

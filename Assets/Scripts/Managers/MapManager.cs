@@ -36,17 +36,23 @@ public class MapManager : MonoBehaviour {
 	public bool isTileMoveable(Vector3 currentPlayerPosition, Player.Direction direction)
 	{
 		int x = (int)currentPlayerPosition.x;
+		Debug.Log("Current X:" + x.ToString()); 
 		int z = (int)currentPlayerPosition.z;
+		Debug.Log("Current X:" + z.ToString()); 
 
 		switch (direction)
 		{
 		case Player.Direction.up:
+			Debug.Log(getTile(x,z + 1, currentMap).Walkable);
 			return getTile(x,z + 1, currentMap).Walkable;
 		case Player.Direction.right:
+			Debug.Log(getTile(x+1 ,z, currentMap).Walkable);
 			return getTile(x + 1,z, currentMap).Walkable;
 		case Player.Direction.down:
+			Debug.Log(getTile(x,z + 1, currentMap).Walkable);
 			return getTile(x, z - 1, currentMap).Walkable;
 		case Player.Direction.left:
+			Debug.Log(getTile(x,z + 1, currentMap).Walkable);
 			return getTile(x - 1, z, currentMap).Walkable;
 		default:
 			return false;

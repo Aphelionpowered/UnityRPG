@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class Player : MonoBehaviour {
 	private GameManager gm;
-	private bool canMove = false;
+	public bool canMove = true;
 	
 	public enum Direction {
 		up,
@@ -70,7 +70,7 @@ public class Player : MonoBehaviour {
 	{
 		if(canMove)
 		{
-			if(gm.mapManager.isTileMoveable(transform.localPosition, Direction.up))
+			if(gm.mapManager.isTileMoveable(transform.localPosition, Direction.down))
 			{
 				transform.localPosition = new Vector3( transform.localPosition.x, transform.localPosition.y, transform.localPosition.z - 1);
 				StartCoroutine(Wait());
@@ -82,7 +82,7 @@ public class Player : MonoBehaviour {
 	{
 		if(canMove)
 		{
-			if(gm.mapManager.isTileMoveable(transform.localPosition, Direction.up))
+			if(gm.mapManager.isTileMoveable(transform.localPosition, Direction.right))
 			{
 				transform.localPosition = new Vector3( transform.localPosition.x + 1, transform.localPosition.y, transform.localPosition.z);
 				StartCoroutine(Wait());
@@ -93,7 +93,7 @@ public class Player : MonoBehaviour {
 	{
 		if(canMove)
 		{
-			if(gm.mapManager.isTileMoveable(transform.localPosition, Direction.up))
+			if(gm.mapManager.isTileMoveable(transform.localPosition, Direction.left))
 			{
 				transform.localPosition = new Vector3( transform.localPosition.x - 1, transform.localPosition.y, transform.localPosition.z);
 				StartCoroutine(Wait());
