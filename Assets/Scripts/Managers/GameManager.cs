@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour {
 	[HideInInspector]
 	public GUIManager gui;
 	[HideInInspector]
-	public MapManager map;
+	public MapManager mapManager;
 	[HideInInspector]
 	public Player player;
 
@@ -20,13 +20,14 @@ public class GameManager : MonoBehaviour {
 		player = GameObject.Find("Player").GetComponent<Player>();
 		playerm = GetComponent<PlayerManager>();
 		gui = GetComponent<GUIManager>();
-		map = GetComponent<MapManager>();
+		mapManager = GetComponent<MapManager>();
 	}
 
 
 
 	void CreateNewLevel(){
 		gui.EnableDebugGUI();
+		mapManager.CreateNewMap(50,50); 
 
 
 	}

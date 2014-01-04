@@ -4,7 +4,7 @@ using System.Collections;
 public class MapManager : MonoBehaviour {
 	private GameManager gm;
 	public float tileSize = 1.0f;
-	private TileMapData currentMap;
+	public TileMapData currentMap;
 
 
 	void Awake () {
@@ -23,11 +23,32 @@ public class MapManager : MonoBehaviour {
 	public void CreateNewMap(int sizex, int sizez){
 		TileMapData tmpmap = new TileMapData(sizex, sizez);
 		currentMap = tmpmap;
+
 	}
 
 	public Tile getTile(int x, int y, TileMapData map) 
 	{
 		return map.map_data[x,y];
+	}
+
+	public bool isTileMoveable(Vector3 currentPlayerPosition, Player.Direction direction)
+	{
+		int x = (int)currentPlayerPosition.x;
+		int z = (int)currentPlayerPosition.z;
+
+		switch (direction)
+		{
+		case Player.Direction.up:
+			return getTile(x,z + 1, currentMap).Walkable;
+		case Player.Direction.right:
+			return getTile(x + 1,z, currentMap).Walkable;
+		case Player.Direction.down:
+			return getTile(x, z - 1, currentMap).Walkable;
+		case Player.Direction.left:
+			return getTile(x - 1, z, currentMap).Walkable;
+		default:
+			return false;
+		}
 	}
 	
 	public void BuildTexture (GameObject go, TileMapData mapinstance, int size_X, int size_Z) { 
@@ -37,7 +58,7 @@ public class MapManager : MonoBehaviour {
 		
 		for(int b=0; b < size_Z; b++) {
 			for(int a=0; a < size_X; a++){
-				Color[] c = mapinstance.getTile(a,b,TileMapData.Location.Current).Graphic;
+				Color[] c = getTile(a,b,currentMap).Graphic;
 				//returns map_data[int x,int y]
 				mytex.SetPixels(a*16, b*16, 16, 16, c);
 			}

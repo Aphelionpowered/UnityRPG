@@ -13,16 +13,7 @@ public class TileMapData {
 
 	Tile floor = new Tile(1,Tile.Kind.Floor,true,"Floor",0);
 	Tile wall = new Tile(2,Tile.Kind.Wall,false,"Wall",1);
-	Tile stone = new Tile(3,Tile.Kind.Stone,false,"Stone",2);
-	
-	public enum Location{
-		Current,
-		Above ,
-		Below,
-		Left,
-		Right,
-	}
-	
+	Tile stone = new Tile(3,Tile.Kind.Stone,false,"Stone",2);	
 
 	/*
 	public List<Vector2> getWalkableTiles(){

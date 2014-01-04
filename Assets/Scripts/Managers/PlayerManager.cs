@@ -3,6 +3,7 @@ using System.Collections;
 
 public class PlayerManager : MonoBehaviour {
 	private GameManager gm;
+	
 
 	void Awake () {
 		gm = GetComponent<GameManager>();
@@ -27,7 +28,7 @@ public class PlayerManager : MonoBehaviour {
 
 	
 	public int ConvertTransformCoordsToTileID(Vector3 MapTransformPosition){
-		Tile t = gm.map.GetCurrentMap.getTile((int)MapTransformPosition.x,(int)MapTransformPosition.z, TileMapData.Location.Current);
+		Tile t = gm.mapManager.getTile((int)MapTransformPosition.x,(int)MapTransformPosition.z, gm.mapManager.currentMap);
 		return t.Id;
 	}
 

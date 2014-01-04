@@ -6,17 +6,21 @@ using System.Collections.Generic;
 public class Player : MonoBehaviour {
 	private GameManager gm;
 	private bool canMove = false;
-	private bool waitActive = false; //so wait function wouldn't be called many times per frame
 	
-
+	public enum Direction {
+		up,
+		right,
+		down,
+		left
+	}
 
 	private Vector3 offset;
-
 
 
 	void Awake (){
 		gm = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
 	}
+
 
 	// Use this for initialization
 	void Start () {
@@ -43,47 +47,57 @@ public class Player : MonoBehaviour {
 	#region Movement
 		#region Wait
 		IEnumerator Wait(){
-			waitActive = true;
+			canMove = false;
+			
 			yield return new WaitForSeconds (0.2f);
+			
 			canMove = true;
-			waitActive = false;
 		}	
 		#endregion
 
-	public void moveUp(){
-		if(!waitActive){
-			StartCoroutine(Wait());
-		}
-		if(canMove && gm.map.GetCurrentMap.getTile((int)getRCoords().x,(int)getRCoords().z,TileMapData.Location.Above).Walkable){
-			transform.localPosition = new Vector3( transform.localPosition.x, transform.localPosition.y, transform.localPosition.z + 1);
-			canMove = false;
-		}
-	}
-	public void moveDown(){
-		if(!waitActive){
-			StartCoroutine(Wait());
-		}
-		if(canMove && gm.map.GetCurrentMap.getTile((int)getRCoords().x,(int)getRCoords().z,TileMapData.Location.Below).Walkable){
-			transform.localPosition = new Vector3( transform.localPosition.x, transform.localPosition.y, transform.localPosition.z - 1);
-			canMove = false;
+	public void moveUp()
+	{
+		if(canMove)
+		{
+			if(gm.mapManager.isTileMoveable(transform.localPosition, Direction.up))
+			{
+				transform.localPosition = new Vector3( transform.localPosition.x, transform.localPosition.y, transform.localPosition.z + 1);
+				StartCoroutine(Wait());
+			}
 		}
 	}
-	public void moveRight(){
-		if(!waitActive){
-			StartCoroutine(Wait());
+	public void moveDown()
+	{
+		if(canMove)
+		{
+			if(gm.mapManager.isTileMoveable(transform.localPosition, Direction.up))
+			{
+				transform.localPosition = new Vector3( transform.localPosition.x, transform.localPosition.y, transform.localPosition.z - 1);
+				StartCoroutine(Wait());
+			}
 		}
-		if(canMove && gm.map.GetCurrentMap.getTile((int)getRCoords().x,(int)getRCoords().z,TileMapData.Location.Right).Walkable){
-		transform.localPosition = new Vector3( transform.localPosition.x + 1, transform.localPosition.y, transform.localPosition.z);
-			canMove = false;
+
+	}
+	public void moveRight()
+	{
+		if(canMove)
+		{
+			if(gm.mapManager.isTileMoveable(transform.localPosition, Direction.up))
+			{
+				transform.localPosition = new Vector3( transform.localPosition.x + 1, transform.localPosition.y, transform.localPosition.z);
+				StartCoroutine(Wait());
+			}
 		}
 	}
-	public void moveLeft(){
-		if(!waitActive){
-			StartCoroutine(Wait());
-		}
-		if(canMove && gm.map.GetCurrentMap.getTile((int)getRCoords().x,(int)getRCoords().z,TileMapData.Location.Left).Walkable){
-		transform.localPosition = new Vector3( transform.localPosition.x - 1, transform.localPosition.y, transform.localPosition.z);
-			canMove = false;
+	public void moveLeft()
+	{
+		if(canMove)
+		{
+			if(gm.mapManager.isTileMoveable(transform.localPosition, Direction.up))
+			{
+				transform.localPosition = new Vector3( transform.localPosition.x - 1, transform.localPosition.y, transform.localPosition.z);
+				StartCoroutine(Wait());
+			}
 		}
 	}
 	#endregion
