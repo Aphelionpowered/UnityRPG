@@ -5,11 +5,11 @@ public class TileMapData {
 	int size_x;
 	int size_y;
 	public Texture2D terrainTiles;
-	
+
 	Tile[,] map_data;
 	List<Room> rooms;
 
-	public Dictionary<int,string> tiles;
+	public Dictionary<int,Tile> tiles;
 
 	Tile floor = new Tile(1,Tile.Kind.Floor,true,"Floor",0);
 	Tile wall = new Tile(2,Tile.Kind.Wall,false,"Wall",1);
