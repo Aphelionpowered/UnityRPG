@@ -23,11 +23,16 @@ public class GameManager : MonoBehaviour {
 		mapManager = GetComponent<MapManager>();
 	}
 
+	void Start()
+	{
+		CreateNewLevel(50,50);
+	}
 
 
-	void CreateNewLevel(){
+
+	void CreateNewLevel(int sizeX, int sizeY){
 		gui.EnableDebugGUI();
-		mapManager.CreateNewMap(50,50); 
+		mapManager.CreateNewMap(sizeX,sizeY); 
 
 
 	}
