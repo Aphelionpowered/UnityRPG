@@ -4,7 +4,7 @@ using System.Collections;
 public class MapManager : MonoBehaviour {
 	private GameManager gm;
 	public float tileSize = 1.0f;
-	private static TileMapData currentMap;
+	private TileMapData currentMap;
 
 
 	void Awake () {
@@ -20,25 +20,14 @@ public class MapManager : MonoBehaviour {
 	void Update () {
 
 	}
-	public TileMapData CreateNewMap(int sizex, int sizez){
+	public void CreateNewMap(int sizex, int sizez){
 		TileMapData tmpmap = new TileMapData(sizex, sizez);
 		currentMap = tmpmap;
-		return tmpmap;
 	}
 
-//	public Tile getTile(int x, int y,Location l) 
-//	{
-//
-//		return null;
-//	}
-	
-	public TileMapData GetCurrentMap {
-		get{
-			return currentMap;
-		}
-		private set{
-			currentMap = value;
-		}
+	public Tile getTile(int x, int y, TileMapData map) 
+	{
+		return map.map_data[x,y];
 	}
 	
 	public void BuildTexture (GameObject go, TileMapData mapinstance, int size_X, int size_Z) { 

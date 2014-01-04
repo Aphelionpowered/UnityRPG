@@ -6,7 +6,7 @@ public class TileMapData {
 	int size_y;
 	public Texture2D terrainTiles;
 
-	Tile[,] map_data;
+	public Tile[,] map_data;
 	List<Room> rooms;
 
 	public Dictionary<int,Tile> tiles;
