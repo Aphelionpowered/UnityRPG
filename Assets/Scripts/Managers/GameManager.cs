@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour {
 
 
 	void Awake(){
-		tileMap = GameObject.Find("TileMap").GetComponent<TileMap>();
+		tileMap = GameObject.Find("Map").GetComponent<TileMap>();
 		player = GameObject.Find("Player").GetComponent<Player>();
 		playerm = GetComponent<PlayerManager>();
 		gui = GetComponent<GUIManager>();

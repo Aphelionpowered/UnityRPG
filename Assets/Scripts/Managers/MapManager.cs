@@ -5,6 +5,7 @@ public class MapManager : MonoBehaviour {
 	private GameManager gm;
 	public float tileSize = 1.0f;
 	public TileMapData currentMap;
+	public GameObject map;
 
 
 	void Awake () {
@@ -23,7 +24,8 @@ public class MapManager : MonoBehaviour {
 	public void CreateNewMap(int sizex, int sizez){
 		TileMapData tmpmap = new TileMapData(sizex, sizez);
 		currentMap = tmpmap;
-
+		BuildMesh(map, sizex, sizez);
+		BuildTexture(map, currentMap, sizex, sizez);
 	}
 
 	public Tile getTile(int x, int y, TileMapData map) 
@@ -51,7 +53,7 @@ public class MapManager : MonoBehaviour {
 		}
 	}
 	
-	public void BuildTexture (GameObject go, TileMapData mapinstance, int size_X, int size_Z) { 
+	public void BuildTexture (GameObject map, TileMapData mapData, int size_X, int size_Z) { 
 		int texWidth = size_X * 16;
 		int texHeight = size_Z * 16;
 		Texture2D mytex = new Texture2D(texWidth,texHeight);
@@ -66,12 +68,12 @@ public class MapManager : MonoBehaviour {
 		mytex.filterMode = FilterMode.Point;
 		mytex.wrapMode = TextureWrapMode.Clamp;
 		mytex.Apply();
-		MeshRenderer mesh_renderer = go.GetComponent<MeshRenderer>();
+		MeshRenderer mesh_renderer = map.GetComponent<MeshRenderer>();
 		mesh_renderer.sharedMaterials[0].mainTexture = mytex;
 		Debug.Log("Done Texture!");
 	}
 
-	public void BuildMesh(GameObject go, int size_X, int size_Z) {
+	public void BuildMesh(GameObject map, int size_X, int size_Z) {
 		//Get the total number of tiles for the given map
 		int numTiles = (size_X * size_Z);
 		
@@ -175,8 +177,8 @@ public class MapManager : MonoBehaviour {
 		mesh.uv = uv;
 		
 		// Assign our mesh to our filter/renderer/collider
-		MeshFilter mf = go.GetComponent<MeshFilter>();
-		MeshCollider mc = go.GetComponent<MeshCollider>();
+		MeshFilter mf = map.GetComponent<MeshFilter>();
+		MeshCollider mc = map.GetComponent<MeshCollider>();
 		DestroyImmediate (mf.sharedMesh);
 		DestroyImmediate (mc.sharedMesh);
 		mf.sharedMesh = mesh;
