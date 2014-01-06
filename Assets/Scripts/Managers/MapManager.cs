@@ -38,7 +38,7 @@ public class MapManager : MonoBehaviour {
 
 	public Vector3 getSpawnPoint() {
 		Room room = currentRooms.FirstOrDefault();
-		Vector3 location = new Vector3(room.left + 1f, 0, room.top + 1f);
+		Vector3 location = new Vector3(room.center_x, 0, room.center_y);
 		return location;
 
 	}
@@ -50,16 +50,12 @@ public class MapManager : MonoBehaviour {
 
 		switch (direction) {
 		case Player.Direction.up:
-			Debug.Log(getTile(x,z + 1, currentMap).Walkable);
 			return getTile(x,z + 1, currentMap).Walkable;
 		case Player.Direction.right:
-			Debug.Log(getTile(x+1 ,z, currentMap).Walkable);
 			return getTile(x + 1,z, currentMap).Walkable;
 		case Player.Direction.down:
-			Debug.Log(getTile(x,z + 1, currentMap).Walkable);
 			return getTile(x, z - 1, currentMap).Walkable;
 		case Player.Direction.left:
-			Debug.Log(getTile(x,z + 1, currentMap).Walkable);
 			return getTile(x - 1, z, currentMap).Walkable;
 		default:
 			return false;
