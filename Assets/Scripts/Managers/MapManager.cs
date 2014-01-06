@@ -14,22 +14,13 @@ public class MapManager : MonoBehaviour {
 	void Awake () {
 		gm = GetComponent<GameManager>();
 	}
-	
-	// Use this for initialization
-	void Start () {
-		
-	}
 
-	// Update is called once per frame
-	void Update () {
-
-	}
-	public void CreateNewMap(int sizex, int sizez){
-		gm.mapData.CreateTileMapData(sizex, sizez);
+	public void CreateNewMap(int sizeX, int sizeZ){
+		gm.mapData.CreateTileMapData(sizeX, sizeZ);
 		currentMap = gm.mapData.MapData;
 		currentRooms = gm.mapData.Rooms;
-		BuildMesh(map, sizex, sizez);
-		BuildTexture(map, sizex, sizez);
+		BuildMesh(map, sizeX, sizeZ);
+		BuildTexture(map, sizeX, sizeZ);
 	}
 
 	public Tile getTile(int x, int z, Tile[,] map) {
@@ -38,11 +29,10 @@ public class MapManager : MonoBehaviour {
 
 	public Vector3 getSpawnPoint() {
 		Room room = currentRooms.FirstOrDefault();
-		Vector3 location = new Vector3(room.center_x, 0, room.center_y);
+		Vector3 location = new Vector3(room.centerX, 0, room.centerZ);
 		return location;
 
 	}
-
 
 	public bool isTileMoveable(Vector3 currentPlayerPosition, Player.Direction direction) {
 		int x = (int)currentPlayerPosition.x;
@@ -67,10 +57,10 @@ public class MapManager : MonoBehaviour {
 		int texHeight = size_Z * 16;
 		Texture2D mytex = new Texture2D(texWidth,texHeight);
 		
-		for(int b=0; b < size_Z; b++) {
-			for(int a=0; a < size_X; a++){
-				Color[] c = getTile(a,b,currentMap).Graphic;
-				mytex.SetPixels(a*16, b*16, 16, 16, c);
+		for(int z=0; z < size_Z; z++) {
+			for(int x=0; x < size_X; x++){
+				Color[] c = getTile(x,z,currentMap).Graphic;
+				mytex.SetPixels(x*16, z*16, 16, 16, c);
 			}
 		}
 		mytex.filterMode = FilterMode.Point;
@@ -104,34 +94,28 @@ public class MapManager : MonoBehaviour {
 		
 		//Get an array of triangleCoords from the number of triangles
 		int[] triangleCoords = new int[ numTris * 3 ];
-		
-		
-		//a = x axis interator
-		//b = z axis interator
-		int a, b;
+
+		int x, z;
 		
 		//Create one tile row at a time working horizontally from 0 total axis vertices
-		for(b=0; b < vsize_z; b++) {
-			for(a=0; a < vsize_x; a++) {
-				vertices[ b * vsize_x + a ] = new Vector3( a*tileSize, 0, b*tileSize ); 
+		for(z=0; z < vsize_z; z++) {
+			for(x=0; x < vsize_x; x++) {
+				vertices[ z * vsize_x + x ] = new Vector3( x*tileSize, 0, z*tileSize ); 
 				//First row = [[0,0,0],[1,0,0],[2,0,0],[3,0,0],...]  
 				//Second row = [[0,0,0],[1,0,1],[2,0,1],[3,0,1],...] 
 				
-				normals[ b * vsize_x + a ] = Vector3.up;
-				uv[ b * vsize_x + a ] = new Vector2( (float)a / (size_X), (float)b / (size_Z) );
+				normals[ z * vsize_x + x ] = Vector3.up;
+				uv[ z * vsize_x + x ] = new Vector2( (float)x / (size_X), (float)z / (size_Z) );
 			}
 		}
 		Debug.Log ("Done Verts!");
-		
-		
-		//LOOP OF DEATH
-		
+	
 		//Create one row of tiles at a time horizontally (4 unique vertices)(6 for each square to draw triangles)
-		for(b=0; b < size_Z; b++) {
-			for(a=0; a < size_X; a++) {
+		for(z=0; z < size_Z; z++) {
+			for(x=0; x < size_X; x++) {
 				
 				
-				int squareIndex = b * size_X + a;
+				int squareIndex = z * size_X + x;
 				//0
 				//1
 				//2
@@ -153,7 +137,7 @@ public class MapManager : MonoBehaviour {
 				//312
 				//318
 				
-				triangleCoords[verticesIndex + 0] = b * vsize_x + a + 		   0;
+				triangleCoords[verticesIndex + 0] = z * vsize_x + x + 		   0;
 				//0
 				//1
 				//2
@@ -162,11 +146,11 @@ public class MapManager : MonoBehaviour {
 				//52
 				//53
 				
-				triangleCoords[verticesIndex + 1] = b * vsize_x + a + vsize_x + 0;
-				triangleCoords[verticesIndex + 2] = b * vsize_x + a + vsize_x + 1;			
-				triangleCoords[verticesIndex + 3] = b * vsize_x + a + 		   0;
-				triangleCoords[verticesIndex + 4] = b * vsize_x + a + vsize_x + 1;
-				triangleCoords[verticesIndex + 5] = b * vsize_x + a + 		   1;
+				triangleCoords[verticesIndex + 1] = z * vsize_x + x + vsize_x + 0;
+				triangleCoords[verticesIndex + 2] = z * vsize_x + x + vsize_x + 1;			
+				triangleCoords[verticesIndex + 3] = z * vsize_x + x + 		   0;
+				triangleCoords[verticesIndex + 4] = z * vsize_x + x + vsize_x + 1;
+				triangleCoords[verticesIndex + 5] = z * vsize_x + x + 		   1;
 				//First Row
 				//[[0,51,52,0,52,1],[1,52,53,1,53,2]
 				//Second Row

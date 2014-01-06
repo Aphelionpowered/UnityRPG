@@ -21,30 +21,11 @@ public class Player : MonoBehaviour {
 		gm = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
 	}
 
-
-	// Use this for initialization
-	void Start () {
-//		setPOffset();
-	}
-
-	private void setPOffset(){
-		transform.localPosition = gm.tileMap.renderer.bounds.extents;
-		Vector3 ex = renderer.bounds.extents;
-		offset = ex;
-		transform.localPosition = new Vector3 (transform.localPosition.x + ex.x,transform.localPosition.y + ex.y, transform.localPosition.z + ex.z);
-	}
-
-
-	public void setPlayerLocation(Vector3 location)
-	{
-		Vector3 offsetLocation = new Vector3(location.x + 0.5f,location.y ,location.z+0.5f);
+	public void setPlayerLocation(Vector3 location){
+		Vector3 offsetLocation = new Vector3(location.x + 0.5f, location.y + 0.5f ,location.z+0.5f);
 		transform.localPosition = offsetLocation;
 	}
 
-	// Update is called once per frame
-	void Update () {
-
-	}
 
 	public Vector3 getRCoords(){
 		Vector3 coords = new Vector3(transform.localPosition.x - offset.x,transform.localPosition.y - offset.y,transform.localPosition.z - offset.z);
@@ -55,9 +36,7 @@ public class Player : MonoBehaviour {
 		#region Wait
 		IEnumerator Wait(){
 			canMove = false;
-			
 			yield return new WaitForSeconds (0.2f);
-			
 			canMove = true;
 		}	
 		#endregion

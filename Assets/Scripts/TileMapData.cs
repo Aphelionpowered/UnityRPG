@@ -20,8 +20,8 @@ public class TileMapData : MonoBehaviour {
 	private int _Size_Y;
 	private Tile[,] _MapData;
 	private List<Room> _Rooms;
-	private int _MyMaxFails = 8;
-	private int _MyMaxRooms = 5;
+	private int _MyMaxFails = 10;
+	private int _MyMaxRooms = 25;
 	private Tile floor, wall, stone;
 
 	public int MaxFails {
@@ -32,7 +32,6 @@ public class TileMapData : MonoBehaviour {
 			_MyMaxFails = value;
 		}
 	}
-
 	public int MaxRooms {
 		get {
 			return _MyMaxRooms;
@@ -140,16 +139,16 @@ public class TileMapData : MonoBehaviour {
 	}
 	
 	void MakeCorridor(Room r1, Room r2) {
-		int x = r1.center_x;
-		int y = r1.center_y;
+		int x = r1.centerX;
+		int y = r1.centerZ;
 		
-		while( x != r2.center_x ) {
+		while( x != r2.centerX ) {
 			_MapData[x,y] = floor;
-			x += x < r2.center_x ? 1 : -1;
+			x += x < r2.centerX ? 1 : -1;
 		}
-		while( y != r2.center_y ) {
+		while( y != r2.centerZ ) {
 			_MapData[x,y] = floor;
-			y += y < r2.center_y ? 1 : -1;
+			y += y < r2.centerZ ? 1 : -1;
 		}
 		r1.isConnected = true;
 		r2.isConnected = true;	

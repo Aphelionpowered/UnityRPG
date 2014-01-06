@@ -17,27 +17,23 @@ public class Room {
 		get { return top + height - 1; }
 	}
 	
-	public int center_x {
+	public int centerX {
 		get { return left + width/2; }
 	}
 	
-	public int center_y {
+	public int centerZ {
 		get { return top + height/2; }
 	}
 	
 	public bool CollidesWith(Room other) {
 		if( left > other.right-1 )
 			return false;
-		
 		if( top > other.bottom-1 )
 			return false;
-		
 		if( right < other.left+1 )
 			return false;
-		
 		if( bottom < other.top+1 )
 			return false;
-		
 		return true;
 	}
 }
