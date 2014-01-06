@@ -34,6 +34,7 @@ public class PlayerManager : MonoBehaviour {
 		player.setPlayerLocation(location);
 	}
 
+
 	
 	public int ConvertTransformCoordsToTileID(Vector3 MapTransformPosition){
 		Tile t = gm.mapManager.getTile((int)MapTransformPosition.x,(int)MapTransformPosition.z, gm.mapManager.currentMap);

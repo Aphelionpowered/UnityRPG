@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 
 public class MapManager : MonoBehaviour {
 	private GameManager gm;
 	public float tileSize = 1.0f;
-	public TileMapData currentMap;
+	public Tile[,] currentMap;
+	public List<Room> currentRooms;
 	public GameObject map;
 
 
@@ -23,34 +25,30 @@ public class MapManager : MonoBehaviour {
 
 	}
 	public void CreateNewMap(int sizex, int sizez){
-		TileMapData tmpmap = new TileMapData(sizex, sizez);
-		currentMap = tmpmap;
+		gm.mapData.CreateTileMapData(sizex, sizez);
+		currentMap = gm.mapData.MapData;
+		currentRooms = gm.mapData.Rooms;
 		BuildMesh(map, sizex, sizez);
-		BuildTexture(map, currentMap, sizex, sizez);
+		BuildTexture(map, sizex, sizez);
 	}
 
-	public Tile getTile(int x, int z, TileMapData map) 
-	{
-		return map.map_data[x,z];
+	public Tile getTile(int x, int z, Tile[,] map) {
+		return map[x,z];
 	}
 
-	public Vector3 getSpawnPoint()
-	{
-		Room room = currentMap.rooms.FirstOrDefault();
+	public Vector3 getSpawnPoint() {
+		Room room = currentRooms.FirstOrDefault();
 		Vector3 location = new Vector3(room.left + 1f, 0, room.top + 1f);
 		return location;
 
 	}
 
-	public bool isTileMoveable(Vector3 currentPlayerPosition, Player.Direction direction)
-	{
-		int x = (int)currentPlayerPosition.x;
-		Debug.Log("Current X:" + x.ToString()); 
-		int z = (int)currentPlayerPosition.z;
-		Debug.Log("Current X:" + z.ToString()); 
 
-		switch (direction)
-		{
+	public bool isTileMoveable(Vector3 currentPlayerPosition, Player.Direction direction) {
+		int x = (int)currentPlayerPosition.x;
+		int z = (int)currentPlayerPosition.z;
+
+		switch (direction) {
 		case Player.Direction.up:
 			Debug.Log(getTile(x,z + 1, currentMap).Walkable);
 			return getTile(x,z + 1, currentMap).Walkable;
@@ -68,7 +66,7 @@ public class MapManager : MonoBehaviour {
 		}
 	}
 	
-	public void BuildTexture (GameObject map, TileMapData mapData, int size_X, int size_Z) { 
+	public void BuildTexture (GameObject map, int size_X, int size_Z) { 
 		int texWidth = size_X * 16;
 		int texHeight = size_Z * 16;
 		Texture2D mytex = new Texture2D(texWidth,texHeight);
@@ -76,7 +74,6 @@ public class MapManager : MonoBehaviour {
 		for(int b=0; b < size_Z; b++) {
 			for(int a=0; a < size_X; a++){
 				Color[] c = getTile(a,b,currentMap).Graphic;
-				//returns map_data[int x,int y]
 				mytex.SetPixels(a*16, b*16, 16, 16, c);
 			}
 		}

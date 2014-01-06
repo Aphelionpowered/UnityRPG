@@ -56,15 +56,15 @@ public class GUITest : MonoBehaviour {
 				GUILayout.BeginHorizontal();
 						GUILayout.BeginVertical();
 							GUILayout.Label("X");
-							GUILayout.Label(gm.playerm.PGetCoords().x.ToString());
+							GUILayout.Label(gm.playerManager.PGetCoords().x.ToString());
 						GUILayout.EndVertical();
 						GUILayout.BeginVertical();
 							GUILayout.Label("Y");
-							GUILayout.Label(gm.playerm.PGetCoords().y.ToString());
+							GUILayout.Label(gm.playerManager.PGetCoords().y.ToString());
 						GUILayout.EndVertical();
 						GUILayout.BeginVertical();
 							GUILayout.Label("Z");
-							GUILayout.Label(gm.playerm.PGetCoords().z.ToString());
+							GUILayout.Label(gm.playerManager.PGetCoords().z.ToString());
 						GUILayout.EndVertical();
 				GUILayout.EndHorizontal();
 				GUILayout.BeginHorizontal();

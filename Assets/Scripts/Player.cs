@@ -38,7 +38,6 @@ public class Player : MonoBehaviour {
 	public void setPlayerLocation(Vector3 location)
 	{
 		Vector3 offsetLocation = new Vector3(location.x + 0.5f,location.y ,location.z+0.5f);
-		Debug.Log("Setting player location to: " + offsetLocation.ToString());
 		transform.localPosition = offsetLocation;
 	}
 

@@ -16,16 +16,16 @@ public class InputManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetKey (KeyCode.W)){
-			gm.playerm.pMoveUp();
+			gm.playerManager.pMoveUp();
 		}
 		if (Input.GetKey (KeyCode.S)){
-			gm.playerm.pMoveDown();
+			gm.playerManager.pMoveDown();
 		}
 		if (Input.GetKey (KeyCode.A)){
-			gm.playerm.pMoveLeft();
+			gm.playerManager.pMoveLeft();
 		}
 		if (Input.GetKey (KeyCode.D)){
-			gm.playerm.pMoveRight();
+			gm.playerManager.pMoveRight();
 			}
 		}
 	}

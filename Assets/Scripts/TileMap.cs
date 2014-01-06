@@ -29,10 +29,7 @@ public class TileMap : MonoBehaviour {
 	}
 	// Use this for initialization
 	void Start () {
-//		TileMapData map = gm.map.CreateNewMap(size_X, size_Z);
-//		gm.map.BuildMesh(this.gameObject,size_X, size_Z);
-//		gm.map.BuildTexture(this.gameObject,map,size_X,size_Z);
-	
+
 	}
 	// Update is called once per frame
 	void Update () {

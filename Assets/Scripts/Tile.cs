@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Tile {
 	//Tile Graphic Storage
-	public Texture2D terrainTiles = (Texture2D)Resources.Load("testapple");
+	Texture2D terrainTiles = (Texture2D)Resources.Load("testapple");
 	//END
 	
 	public int Id;
@@ -13,8 +13,7 @@ public class Tile {
 	public bool Walkable;
 	public string Name;
 	public Color[] Graphic;
-	private int _height;
-
+	private int _Height;
 	
 	public enum Kind {
 		Unknown,
@@ -24,15 +23,14 @@ public class Tile {
 	}
 	
 	public int Height {
-		get { return _height; }
+		get { return _Height; }
 		set {
 			Walkable = value == 0;
-			_height = value;
+			_Height = value;
 		}
 	}
 
 	public Tile(int id, Kind kind, bool walkable, string name, int height) {
-		// Code HereQ
 		Id = id;
 		_Kind = kind;
 		Myresolution = 16;
