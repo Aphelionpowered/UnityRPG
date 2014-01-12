@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Room {
 	public int left;
-	public int top;
+	public int bottom;
 	public int width;
 	public int height;
 
@@ -14,8 +14,8 @@ public class Room {
 		get {return left + width - 1;}
 	}
 	
-	public int bottom {
-		get { return top + height - 1; }
+	public int top {
+		get { return bottom + height - 1; }
 	}
 	
 	public int centerX {
@@ -23,17 +23,17 @@ public class Room {
 	}
 	
 	public int centerZ {
-		get { return top + height/2; }
+		get { return bottom + height/2; }
 	} 
 	
 	public bool CollidesWith(Room other) {
 		if( left > other.right-1 )
 			return false;
-		if( top > other.bottom-1 )
+		if( bottom > other.top-1 )
 			return false;
 		if( right < other.left+1 )
 			return false;
-		if( bottom < other.top+1 )
+		if( top < other.bottom+1 )
 			return false;
 		return true;
 	}
@@ -41,14 +41,16 @@ public class Room {
 	public bool hasDoor;
 
 	public int DoorX {
-		//filler
-		get{ return bottom + 1;}
+		get{ 
+			return left;
+		}
 
 	}
 
 	public int DoorZ {
-		//filer
-		get{ return top - 1;}
+		get{ 
+			return bottom;
+		}
 	}
 
 
