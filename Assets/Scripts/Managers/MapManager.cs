@@ -59,8 +59,8 @@ public class MapManager : MonoBehaviour {
 		
 		for(int z=0; z < size_Z; z++) {
 			for(int x=0; x < size_X; x++){
-				Color[] c = getTile(x,z,currentMap).Graphic;
-				mytex.SetPixels(x*16, z*16, 16, 16, c);
+				Tile t = getTile(x,z,currentMap);
+				mytex.SetPixels(x*t.Myresolution, z*t.Myresolution, t.Myresolution, t.Myresolution, t.Graphic);
 			}
 		}
 		mytex.filterMode = FilterMode.Point;
@@ -148,9 +148,9 @@ public class MapManager : MonoBehaviour {
 				
 				triangleCoords[verticesIndex + 1] = z * vsize_x + x + vsize_x + 0;
 				triangleCoords[verticesIndex + 2] = z * vsize_x + x + vsize_x + 1;			
-				triangleCoords[verticesIndex + 3] = z * vsize_x + x + 		   0;
+				triangleCoords[verticesIndex + 3] = z * vsize_x + x + 		    0;
 				triangleCoords[verticesIndex + 4] = z * vsize_x + x + vsize_x + 1;
-				triangleCoords[verticesIndex + 5] = z * vsize_x + x + 		   1;
+				triangleCoords[verticesIndex + 5] = z * vsize_x + x + 		    1;
 				//First Row
 				//[[0,51,52,0,52,1],[1,52,53,1,53,2]
 				//Second Row

@@ -6,22 +6,14 @@ public class PlayerManager : MonoBehaviour {
 	private Player player;
 	
 
-	void Awake () {
+	void Awake ()
+	{
 		gm = GetComponent<GameManager>();
 		player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
 	}
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
-	public int TileID {
+	public int TileID
+	{
 		get {
 			Vector3 currentCoords = gm.player.getRCoords();
 			return ConvertTransformCoordsToTileID(currentCoords);
@@ -34,30 +26,34 @@ public class PlayerManager : MonoBehaviour {
 		player.setPlayerLocation(location);
 	}
 
-
-	
-	public int ConvertTransformCoordsToTileID(Vector3 MapTransformPosition){
+	public int ConvertTransformCoordsToTileID(Vector3 MapTransformPosition)
+	{
 		Tile t = gm.mapManager.getTile((int)MapTransformPosition.x,(int)MapTransformPosition.z, gm.mapManager.currentMap);
 		return t.Id;
 	}
 
-	public Vector3 PGetCoords(){
+	public Vector3 PGetCoords()
+	{
 		return gm.player.getRCoords();
 	}
 	#region Movement
-	public void pMoveUp(){
+	public void pMoveUp()
+	{
 		gm.player.moveUp();
 	}
 	
-	public void pMoveDown(){
+	public void pMoveDown()
+	{
 		gm.player.moveDown();
 	}
 	
-	public void pMoveRight(){
+	public void pMoveRight()
+	{
 		gm.player.moveRight();
 	}
 	
-	public void pMoveLeft(){
+	public void pMoveLeft()
+	{
 		gm.player.moveLeft();
 	}
 	#endregion

@@ -6,7 +6,8 @@ public class Room {
 	public int top;
 	public int width;
 	public int height;
-	
+
+
 	public bool isConnected=false;
 	
 	public int right {
@@ -23,7 +24,7 @@ public class Room {
 	
 	public int centerZ {
 		get { return top + height/2; }
-	}
+	} 
 	
 	public bool CollidesWith(Room other) {
 		if( left > other.right-1 )
@@ -36,4 +37,21 @@ public class Room {
 			return false;
 		return true;
 	}
+
+	public bool hasDoor;
+
+	public int DoorX {
+		//filler
+		get{ return bottom + 1;}
+
+	}
+
+	public int DoorZ {
+		//filer
+		get{ return top - 1;}
+	}
+
+
+
+
 }
