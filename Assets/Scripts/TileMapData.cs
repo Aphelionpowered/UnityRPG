@@ -192,7 +192,7 @@ public class TileMapData : MonoBehaviour {
 			{
 				_MapData[x,z] = floor;
 				x += x < r2.centerX ? 1 : -1;
-			if(_MapData[x,z] == wall && (x== r1.left || x == r2.left || x== r1.left + r1.width - 1 || x == r2.left + r2.width - 1)){
+			if(_MapData[x,z] == wall || (x== r1.left || x == r2.left || x== r1.left + r1.width - 1 || x == r2.left + r2.width - 1)){
 					_DoorCoords = new Vector2(x,z);
 					_PossibleDoors.Add(_DoorCoords);
 				}
