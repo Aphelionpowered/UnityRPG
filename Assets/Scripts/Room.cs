@@ -40,20 +40,19 @@ public class Room {
 
 	public bool hasDoor;
 
-	public int DoorX {
-		get{ 
-			return left;
-		}
-
-	}
+	public int DoorX;
 
 	public int DoorZ {
 		get{ 
-			return bottom;
+			if( DoorX == left )
+			{
+				return bottom + Random.Range(0,height - 1);
+			}
+			if( DoorX == left + width - 1)
+			{
+				return bottom + Random.Range(0,height - 1);
+			}
+ 			return bottom;
 		}
 	}
-
-
-
-
 }

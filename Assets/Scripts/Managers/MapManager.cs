@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +17,7 @@ public class MapManager : MonoBehaviour {
 
 	public void CreateNewMap(int sizeX, int sizeZ){
 		gm.mapData.CreateTileMapData(sizeX, sizeZ);
-		currentMap = gm.mapData.MapData;
+		currentMap = gm.mapData.CurrentMapData;
 		currentRooms = gm.mapData.Rooms;
 		BuildMesh(map, sizeX, sizeZ);
 		BuildTexture(map, sizeX, sizeZ);
