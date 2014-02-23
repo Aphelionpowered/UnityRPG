@@ -38,21 +38,4 @@ public class Room {
 		return true;
 	}
 
-	public bool hasDoor;
-
-	public int DoorX;
-
-	public int DoorZ {
-		get{ 
-			if( DoorX == left )
-			{
-				return bottom + Random.Range(0,height - 1);
-			}
-			if( DoorX == left + width - 1)
-			{
-				return bottom + Random.Range(0,height - 1);
-			}
- 			return bottom;
-		}
-	}
 }

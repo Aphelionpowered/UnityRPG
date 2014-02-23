@@ -121,6 +121,7 @@ public class TileMapData : MonoBehaviour {
 		}
 		MakeWalls();
 		MakeDoor();
+		MakeExit();
 	}
 
 	bool RoomCollides(Room r)
@@ -152,20 +153,15 @@ public class TileMapData : MonoBehaviour {
 		
 		while(_Rooms.Count < MaxRooms)
 		{
-			int roomSizeX = Random.Range(4,14);
-			int roomSizeZ = Random.Range(4,10);
+			int roomSizeX = Random.Range(6,14);
+			int roomSizeZ = Random.Range(5,10);
 			
 			r = new Room();
 			r.left = Random.Range(0, _SizeX - roomSizeX);
 			r.bottom = Random.Range(0, _SizeZ - roomSizeZ);
 			r.width = roomSizeX;
 			r.height = roomSizeZ;
-			r.hasDoor = true;
 
-			if( r.hasDoor){
-				r.DoorX = Random.Range(r.left, r.left + r.width - 1);
-			}
-			
 			if(!RoomCollides(r))
 			{
 				_Rooms.Add (r);
@@ -247,25 +243,13 @@ public class TileMapData : MonoBehaviour {
 			}
 		}
 	}
-
-		
-	/*
+	
 	void MakeExit() {
-		for(int x=0; x< _SizeX;x++)
-		{
-			for(int z=0; z< _SizeZ;z++)
-			{
-				if(_MapData[x,z]==wall && ValidExit(x,z))
-				{
-					_ExitCoords = new Vector2(x,z);
-					_PossibleExits.Add(_ExitCoords);
-				}
-			}
-		}
-		Vector2 RealExit = _PossibleExits[Random.Range(0,_PossibleExits.Count)];
-		_MapData[(int)RealExit.x,(int)RealExit.y] = unknown;
+		Room r = Rooms[Random.Range(1, _Rooms.Count)];
+		int x = r.left + Random.Range(2, r.width);
+		int z = r.bottom + Random.Range(2, r.height);
+			_MapData[x,z] = unknown;
 	}
-	*/
 	
 	bool HasAdjacentTile(int x, int z, Tile t)
 	{
