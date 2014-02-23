@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
-public class Tile {
+public class Tile
+{
 	//Tile Graphic Storage
 	Texture2D terrainTiles = (Texture2D)Resources.Load("testapple");
 	//END
+
+	public Dictionary<int, Tile> TileDictionary = new Dictionary<int, Tile>();
 	
 	public int Id;
 	public Kind _Kind;
@@ -15,22 +18,26 @@ public class Tile {
 	public Color[] Graphic;
 	private int _Height;
 	
-	public enum Kind {
+	public enum Kind
+	{
 		Unknown,
 		Floor,
 		Wall,
 		Stone,
 	}
 	
-	public int Height {
+	public int Height
+	{
 		get { return _Height; }
-		set {
+		set 
+		{
 			Walkable = value == 0;
 			_Height = value;
 		}
 	}
 
-	public Tile(int id, Kind kind, bool walkable, string name, int height) {
+	public Tile(int id, Kind kind, bool walkable, string name, int height)
+	{
 		Id = id;
 		_Kind = kind;
 		Myresolution = 16;
@@ -41,13 +48,15 @@ public class Tile {
 		Height = height;
 	}
 
-	Color[] tilegraphic(int tileid){
-		//int tileid =(int) k;
+	Color[] tilegraphic(int tileid)
+	{
 		int numTilesPerRow = terrainTiles.width / 16;
 		int numRows = terrainTiles.height / 16;
 		Color[][] tiles = new Color[numTilesPerRow * numRows][];
-		for(int b=0; b < numRows; b++) {
-			for(int a=0; a < numTilesPerRow; a++){
+		for(int b=0; b < numRows; b++)
+		{
+			for(int a=0; a < numTilesPerRow; a++)
+			{
 				tiles[b*numTilesPerRow + a] = terrainTiles.GetPixels( a*Myresolution, b*Myresolution, Myresolution, Myresolution);
 			}
 		}

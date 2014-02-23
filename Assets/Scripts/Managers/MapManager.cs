@@ -57,8 +57,10 @@ public class MapManager : MonoBehaviour {
 		int texHeight = size_Z * 16;
 		Texture2D mytex = new Texture2D(texWidth,texHeight);
 		
-		for(int z=0; z < size_Z; z++) {
-			for(int x=0; x < size_X; x++){
+		for(int z=0; z < size_Z; z++)
+		{
+			for(int x=0; x < size_X; x++)
+			{
 				Tile t = getTile(x,z,currentMap);
 				mytex.SetPixels(x*t.Myresolution, z*t.Myresolution, t.Myresolution, t.Myresolution, t.Graphic);
 			}

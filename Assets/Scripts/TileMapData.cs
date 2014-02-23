@@ -30,7 +30,7 @@ public class TileMapData : MonoBehaviour {
 	private List<Room> _Rooms;
 	private Room _CurrentRoom;
 
-	//Corrider
+	//CORRIDOR
 	private List<Vector2> _Corridors;
 
 	private Tile floor, wall, stone, unknown;
@@ -101,16 +101,16 @@ public class TileMapData : MonoBehaviour {
 
 		_MapData = new Tile[sizeX,sizeZ];
 		_Rooms = new List<Room>();
-//		_PossibleExits = new List<Vector2>();
 		_PossibleDoors = new List<Vector2>();
-//		_GoodDoors = new List<Vector2>();
 
 		FillMap();
 		CreateRooms();
+
 		foreach(Room rr in _Rooms)
 		{
 			MakeRoom(rr);
 		}
+
 		for(int i=0; i < _Rooms.Count; i++)
 		{
 			if(!_Rooms[i].isConnected)
@@ -226,7 +226,7 @@ public class TileMapData : MonoBehaviour {
 		{
 			for(int z=0; z< _SizeZ;z++)
 			{
-				if(_MapData[x,z]==stone && HasAdjacentFloor(x,z))
+				if(_MapData[x,z]==stone && HasAdjacentTile(x,z,floor))
 				{
 					_MapData[x,z]= wall;
 				}
@@ -240,7 +240,7 @@ public class TileMapData : MonoBehaviour {
 		{
 			int x = (int)possibleDoor.x;
 			int z = (int)possibleDoor.y;
-			if(ValidDoor(x,z) && _MapData[x,z] == floor)
+			if(HasParallelTile(x,z,wall) && _MapData[x,z] == floor)
 			{
 				cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
 				cube.transform.position = new Vector3(x + 0.5f , 0.5f, z + 0.5f);
@@ -267,45 +267,70 @@ public class TileMapData : MonoBehaviour {
 	}
 	*/
 	
-	bool HasAdjacentFloor(int x, int z)
+	bool HasAdjacentTile(int x, int z, Tile t)
 	{
-		if( x > 0 && _MapData[x-1,z] == floor )
+		if( x > 0 && _MapData[x-1,z] == t )
 			return true;
-		if( x < _SizeX-1 && _MapData[x+1,z] == floor )
+		if( x < _SizeX-1 && _MapData[x+1,z] == t )
 			return true;
-		if( z > 0 && _MapData[x,z-1] == floor )
+		if( z > 0 && _MapData[x,z-1] == t )
 			return true;
-		if( z < _SizeZ-1 && _MapData[x,z+1] == floor )
+		if( z < _SizeZ-1 && _MapData[x,z+1] == t )
 			return true;
-		if( x > 0 && z > 0 && _MapData[x-1,z-1] == floor )
+		if( x > 0 && z > 0 && _MapData[x-1,z-1] == t )
 			return true;
-		if( x < _SizeX - 1 && z > 0 && _MapData[x+1,z-1] == floor )
+		if( x < _SizeX - 1 && z > 0 && _MapData[x+1,z-1] == t )
 			return true;
-		if( x > 0 && z < _SizeZ-1 && _MapData[x-1,z+1] == floor )
+		if( x > 0 && z < _SizeZ-1 && _MapData[x-1,z+1] == t )
 			return true;
-		if( x < _SizeX-1 && z < _SizeZ-1 && _MapData[x+1,z+1] == floor )
+		if( x < _SizeX-1 && z < _SizeZ-1 && _MapData[x+1,z+1] == t )
 			return true;
 		return false;
 	}
 
-	bool ValidDoor(int x, int z)
+	bool HasAdjacentRoom(int x, int z)
 	{
-		if( _MapData[x-1,z] == wall && _MapData[x+1,z] == wall )
+		return true;
+
+	}
+
+
+
+	bool HasParallelTile(int x, int z, Tile t)
+	{
+		if( _MapData[x-1,z] == t && _MapData[x+1,z] == t )
 			return true;
-		if( _MapData[x,z-1] == wall && _MapData[x,z+1] == wall)
+		if( _MapData[x,z-1] == t && _MapData[x,z+1] == t)
 			return true;
 		return false;
 	}
 
-	bool ValidExit(int x, int z)
+	bool DoubleDoor(int x, int z){
+		if( _MapData[x-2,z] == wall && _MapData[x+2,z] == wall )
+		{
+			if(HasParallelTile(x,z,floor))
+			{
+				return true;
+			}
+		}
+		if( _MapData[x,z-2] == wall && _MapData[x,z+2] == wall)
+			if(HasParallelTile(x,z,floor))
+			{
+				return true;
+			}
+		return false;
+	}
+
+
+	bool NotCornerTile(int x, int z, Tile t)
 	{
-		if( x > 0 && _MapData[x-1,z] == floor )
+		if( x > 0 && _MapData[x-1,z] == t )
 			return true;
-		if( x < _SizeX-1 && _MapData[x+1,z] == floor )
+		if( x < _SizeX-1 && _MapData[x+1,z] == t )
 			return true;
-		if( z > 0 && _MapData[x,z-1] == floor )
+		if( z > 0 && _MapData[x,z-1] == t )
 			return true;
-		if( z < _SizeZ-1 && _MapData[x,z+1] == floor )
+		if( z < _SizeZ-1 && _MapData[x,z+1] == t )
 			return true;
 		return false;
 	}
